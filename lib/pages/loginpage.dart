@@ -4,9 +4,16 @@ import 'package:flutter/material.dart';
 
 import '../utils/routes.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String name = "";
+  bool changeButton = false;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -23,7 +30,7 @@ class LoginPage extends StatelessWidget {
                 height: 20.0,
               ),
               Text(
-                "Welcome",
+                "Welcome $name",
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -36,6 +43,10 @@ class LoginPage extends StatelessWidget {
                     TextFormField(
                       decoration: InputDecoration(
                           hintText: "Enter Username", labelText: "Username"),
+                      onChanged: (value) {
+                        name = value;
+                        setState(() {});
+                      },
                     ),
                     TextFormField(
                       obscureText: true,
@@ -45,17 +56,54 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: 40.0,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // ignore: avoid_print
+                    InkWell(
+                      onTap: () async {
+                        setState(() {
+                          changeButton = true;
+                        });
+                        await Future.delayed(Duration(seconds: 1));
+                        // ignore: use_build_context_synchronously
                         Navigator.pushNamed(context, MyRoutes.homeRoute);
                       },
-                      // ignore: sort_child_properties_last
-                      child: Text(
-                        "Login",
+                      child: AnimatedContainer(
+                        height: 50,
+                        duration: Duration(seconds: 1),
+                        width: changeButton ? 50 : 150,
+                        alignment: Alignment.center,
+                        // ignore: sort_child_properties_last
+                        child: changeButton
+                            ? Icon(
+                                Icons.done,
+                                color: Colors.white,
+                              )
+                            : Text(
+                                "Login",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple,
+                          // shape: changeButton
+                          //     ? BoxShape.circle
+                          //     : BoxShape.rectangle,
+                          borderRadius:
+                              BorderRadius.circular(changeButton ? 50 : 8),
+                        ),
                       ),
-                      style: TextButton.styleFrom(maximumSize: Size(100, 40)),
-                    )
+                    ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     // ignore: avoid_print
+                    //     Navigator.pushNamed(context, MyRoutes.homeRoute);
+                    //   },
+                    //   // ignore: sort_child_properties_last
+                    //   child: Text(
+                    //     "Login",
+                    //   ),
+                    //   style: TextButton.styleFrom(maximumSize: Size(100, 40)),
+                    // ),
                   ],
                 ),
               )
