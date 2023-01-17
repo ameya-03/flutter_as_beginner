@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_as_beginner/pages/homepage.dart';
 import 'package:flutter_as_beginner/pages/loginpage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   // ignore: prefer_const_constructors
@@ -20,9 +21,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // ignore: prefer_const_constructors
       themeMode: ThemeMode.light,
+      theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+          fontFamily: GoogleFonts.lato().fontFamily),
       darkTheme: ThemeData(brightness: Brightness.dark),
       // ignore: prefer_const_literals_to_create_immutables, prefer_const_constructors
-      initialRoute: "/home",
+      //  initialRoute: "/home",
       routes: {
         // ignore: prefer_const_constructors
         "/": (context) => LoginPage(),
