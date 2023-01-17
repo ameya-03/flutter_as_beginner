@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_as_beginner/homepage.dart';
 
 void main() {
   // ignore: prefer_const_constructors
@@ -11,11 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
+
+    // ignore: prefer_const_constructors
     return MaterialApp(
-      home: const Material(
-          child: Center(
-        child: Text("Welcome to 30 days of Flutter"),
-      )),
-    );
+        // ignore: prefer_const_constructors
+        home: HomePage());
   }
 }
